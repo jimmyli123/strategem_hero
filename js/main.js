@@ -20,6 +20,7 @@ function play() {
     clearShowArea();
     
     let answerSheet = []
+    let indexOfCurrent = 0;
     for (let i =0; i<numberOfArrows; i++) {
         let key = Math.ceil(Math.random() *4)
         
@@ -27,6 +28,7 @@ function play() {
         
         if (key === 1) {
             arrow.classList.add("fa-solid", "fa-arrow-left", "fa-5x")
+
             answerSheet.push(37)
         } else if (key === 2) {
             arrow.classList.add("fa-solid", "fa-arrow-right", "fa-5x")
@@ -38,7 +40,7 @@ function play() {
             arrow.classList.add("fa-solid", "fa-arrow-down", "fa-5x")
             answerSheet.push(40)
         }
-        
+        arrow.setAttribute('id',i)
         showArea.appendChild(arrow);
     }
     console.log(answerSheet)
@@ -46,20 +48,23 @@ function play() {
 
     window.addEventListener('keydown', function(e){
         if (e.repeat) { return; }
+        console.log(answerSheet)
+        console.log(`Current index = ${indexOfCurrent}`)
         console.log(e.keyCode)
+        if (e.keyCode === answerSheet[indexOfCurrent]) {
+            console.log(`You inputted the correct arrow. Increasing the index to ${indexOfCurrent + 1}`)
+            document.getElementById(indexOfCurrent).classList.add('correctArrow');
+            indexOfCurrent++;
+        } else {
+            indexOfCurrent = 0;
+            let allArrows = this.document.querySelectorAll('i')
+            for (let item of allArrows) {
+                item.classList.remove("correctArrow");
+            }
+        }
     })
     console.log(e)
 
-    // for (let i =0; i<answerSheet.length; i++) {
-    //     console.log(`Current keycode is ${e.keyCode}. Answersheet code is ${answerSheet[i]}`)
-    //     if (e.keyCode === answerSheet[i]) {
-    //         console.log('that is correct')
-    //     }
-    //     else {
-    //         console.log('incorrect')
-    //     }
-    // }
-        
     
 }
 

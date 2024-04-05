@@ -1,10 +1,13 @@
 
-.fa-solid.fa-arrow-right {
+/* .fa-solid.fa-arrow-right {
     color: blue;
-}
+} */
 div {
      text-align: center;
      
+}
+.correctArrow {
+    color: red;
 }
 
 button {
