@@ -46,6 +46,8 @@ function play() {
     console.log(answerSheet)
     console.log('have we started playing?')
 
+
+    // keydown press is returning multiple events. Find out why next time.
     window.addEventListener('keydown', function(e){
         if (e.repeat) { return; }
         console.log(answerSheet)
@@ -55,15 +57,19 @@ function play() {
             console.log(`You inputted the correct arrow. Increasing the index to ${indexOfCurrent + 1}`)
             document.getElementById(indexOfCurrent).classList.add('correctArrow');
             indexOfCurrent++;
-        } else {
+            if (indexOfCurrent >= answerSheet.length) {
+                console.log('You finished the game!')
+            }
+        } else  if (e.keyCode !== answerSheet[indexOfCurrent]) {
             indexOfCurrent = 0;
+            console.log('Incorrect arrow.')
             let allArrows = this.document.querySelectorAll('i')
             for (let item of allArrows) {
                 item.classList.remove("correctArrow");
             }
         }
     })
-    console.log(e)
+    
 
     
 }
