@@ -50,15 +50,18 @@ function play() {
     // keydown press is returning multiple events. Find out why next time.
     window.addEventListener('keydown', function(e){
         if (e.repeat) { return; }
-        console.log(answerSheet)
+        console.log('Beginning a new line.')
+        // console.log(answerSheet)
         console.log(`Current index = ${indexOfCurrent}`)
-        console.log(e.keyCode)
+        // console.log(e.keyCode)
         if (e.keyCode === answerSheet[indexOfCurrent]) {
             console.log(`You inputted the correct arrow. Increasing the index to ${indexOfCurrent + 1}`)
             document.getElementById(indexOfCurrent).classList.add('correctArrow');
             indexOfCurrent++;
             if (indexOfCurrent >= answerSheet.length) {
                 console.log('You finished the game!')
+                // This play function is calling another instance of the eventlistener. Find a way to place this outside the function.
+                play()
             }
         } else  if (e.keyCode !== answerSheet[indexOfCurrent]) {
             indexOfCurrent = 0;
