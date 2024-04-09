@@ -1,4 +1,6 @@
-document.querySelector('button').addEventListener('click', play)
+document.getElementById('easyButton').addEventListener('click', play)
+document.getElementById('mediumButton').addEventListener('click', play)
+document.getElementById('hardButton').addEventListener('click', play)
 
 let rightArrow = document.querySelector('.fa-solid fa-arrow-right fa-5x')
 console.log('its working')
@@ -10,12 +12,21 @@ let mapping = {
     'ArrowDown':40
 }
 
+let difficultyLevel;
+
 function play() {
     // Code the 3 second delay
-    // Generate random arrows
-    // If key press does not match arrow, start over
-
-    let numberOfArrows = Math.ceil(Math.random()*5)
+    
+    console.log(this.id)
+    console.log(difficultyLevel)
+    // Find out why this undefined if case isn't working
+    if (this.dataset.diff === undefined) {
+    } else {
+        difficultyLevel = parseInt(this.dataset.diff)
+    }
+    console.log(difficultyLevel)
+    
+    let numberOfArrows = Math.ceil(Math.random()*difficultyLevel)
     const showArea = document.querySelector("#show")
     clearShowArea();
     
@@ -45,6 +56,7 @@ function play() {
 
 
     var myListener = function(e) {
+        
         console.log('Beginning a new line.')
         console.log(`Current index = ${indexOfCurrent}`)
         console.log(e.keyCode)
@@ -54,7 +66,7 @@ function play() {
             indexOfCurrent++;
             if (indexOfCurrent >= answerSheet.length) {
                 console.log('You finished the game!')
-                window.removeEventListener('keydown', myListener)
+                // window.removeEventListener('keydown', myListener)
                 play()
             }
         } else  if (e.keyCode !== answerSheet[indexOfCurrent]) {
@@ -67,6 +79,7 @@ function play() {
         }
 
     }
+    window.removeEventListener('keydown', myListener)
     window.addEventListener('keydown', myListener)
 
         
