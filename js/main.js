@@ -3,7 +3,7 @@ document.getElementById('mediumButton').addEventListener('click', play)
 document.getElementById('hardButton').addEventListener('click', play)
 
 let rightArrow = document.querySelector('.fa-solid fa-arrow-right fa-5x')
-console.log('its working')
+
 
 let mapping = {
     'ArrowRight':39,
@@ -14,17 +14,18 @@ let mapping = {
 
 let difficultyLevel;
 
+
+// Error: getting an additional eventlistener everytime I click on a button wihtout refreshing the page.
 function play() {
     // Code the 3 second delay
-    
-    console.log(this.id)
-    console.log(difficultyLevel)
+    window.removeEventListener('keydown', myListener)
+
     // Find out why this undefined if case isn't working
-    if (this.dataset.diff === undefined) {
+    
+    if (this.dataset === undefined) {
     } else {
         difficultyLevel = parseInt(this.dataset.diff)
     }
-    console.log(difficultyLevel)
     
     let numberOfArrows = Math.ceil(Math.random()*difficultyLevel)
     const showArea = document.querySelector("#show")
@@ -66,7 +67,7 @@ function play() {
             indexOfCurrent++;
             if (indexOfCurrent >= answerSheet.length) {
                 console.log('You finished the game!')
-                // window.removeEventListener('keydown', myListener)
+                window.removeEventListener('keydown', myListener)
                 play()
             }
         } else  if (e.keyCode !== answerSheet[indexOfCurrent]) {
@@ -79,7 +80,7 @@ function play() {
         }
 
     }
-    window.removeEventListener('keydown', myListener)
+    // window.removeEventListener('keydown', myListener)
     window.addEventListener('keydown', myListener)
 
         
