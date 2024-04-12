@@ -2,6 +2,15 @@
 /* .fa-solid.fa-arrow-right {
     color: blue;
 } */
+html, body {
+    margin: 0; 
+    height: 100%;
+}
+body {
+    background: linear-gradient(#0c92b7, #bf9121);
+    background-repeat: no-repeat;
+}
+
 div {
      text-align: center;
      
@@ -12,4 +21,18 @@ div {
 
 button {
     /* Make the button work first */
+}
+.hide {
+    display: none;
+}
+.button_container { 
+    /* background-color: blue; */
+    padding: 10%;
+    margin: 0;
+    
+}
+#refresh {
+    display: block;
+    margin: auto;
+    
 }

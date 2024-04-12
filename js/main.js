@@ -1,9 +1,16 @@
 document.getElementById('easyButton').addEventListener('click', play)
 document.getElementById('mediumButton').addEventListener('click', play)
 document.getElementById('hardButton').addEventListener('click', play)
+document.getElementById('refresh').addEventListener('click', startOver)
 
 let rightArrow = document.querySelector('.fa-solid fa-arrow-right fa-5x')
 
+// Prevent arrow keys from scrolling the page.
+window.addEventListener("keydown", function(e) {
+    if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1) {
+        e.preventDefault();
+    }
+}, false);
 
 let mapping = {
     'ArrowRight':39,
@@ -14,13 +21,18 @@ let mapping = {
 
 let difficultyLevel;
 
+function startOver() {
+    location.reload();
+}
 
 // Error: getting an additional eventlistener everytime I click on a button wihtout refreshing the page.
 function play() {
     // Code the 3 second delay
-    window.removeEventListener('keydown', myListener)
-
-    // Find out why this undefined if case isn't working
+    // document.removeEventListener('keydown', myListener)
+    let buttonsToHide = document.querySelectorAll(".optionButton")
+    for (let item of buttonsToHide) {
+        item.classList.add("hide")
+    }
     
     if (this.dataset === undefined) {
     } else {
@@ -67,27 +79,22 @@ function play() {
             indexOfCurrent++;
             if (indexOfCurrent >= answerSheet.length) {
                 console.log('You finished the game!')
-                window.removeEventListener('keydown', myListener)
+                document.removeEventListener('keydown', myListener)
                 play()
             }
         } else  if (e.keyCode !== answerSheet[indexOfCurrent]) {
             indexOfCurrent = 0;
             console.log('Incorrect arrow.')
-            let allArrows = this.document.querySelectorAll('i')
+            let allArrows = document.querySelectorAll('i')
             for (let item of allArrows) {
                 item.classList.remove("correctArrow");
             }
         }
 
     }
-    // window.removeEventListener('keydown', myListener)
-    window.addEventListener('keydown', myListener)
-
-        
-   
-    
-
-    
+    let test = document.addEventListener('keydown', myListener)
+    // console.log(test)
+       
 }
 
 
